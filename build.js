@@ -177,7 +177,7 @@ let html = `<!DOCTYPE html>
     const tags = recipeTags[i];
     if (tags.length) {
       const badges = tags.map(t => '<span class=\"tag\">' + (tagEmoji[t] || '') + ' ' + escHtml(t) + '</span>').join(' ');
-      html = html.replace(/<h1>(.*?)<\/h1>/, '<h1>$1 ' + badges + '</h1>');
+      html = html.replace(/<h1>(.*?)<\\/h1>/, '<h1>$1 ' + badges + '<\\/h1>');
     }
     el.innerHTML = html;
   }
