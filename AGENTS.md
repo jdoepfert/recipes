@@ -1,5 +1,16 @@
 # Recipe Format Conventions
 
+## Recipe Structure
+
+Every recipe **must** follow this exact section order:
+
+1. `## Allgemeine Hinweise`
+2. `## Zutaten`
+3. `## Zubereitung`
+4. `## Nährstoffe und Kalorien`
+
+The structure must stay the same for every recipe. Do not rename, reorder, or omit sections.
+
 ## Nutritional Value Section
 
 Every recipe **must** include a `## Nährstoffe und Kalorien` section following the schema from `linsen-cashew-aufstrich.md`:
