@@ -17,15 +17,20 @@ function parseTags(content) {
   return m[1].split(',').map(t => t.trim()).filter(Boolean);
 }
 
+function stripFrontmatter(content) {
+  return content.replace(/^---\n[\s\S]*?\n---\n/, '');
+}
+
 const files = fs.readdirSync(recipesDir)
   .filter(f => f.endsWith('.md'))
   .sort();
 
 let recipes = files.map(file => {
-  const content = fs.readFileSync(path.join(recipesDir, file), 'utf-8');
-  const title = content.split('\n')[0].replace(/^#\s*/, '').trim();
-  const tags = parseTags(content);
-  return { file, title, tags, content: JSON.stringify(content) };
+  const raw = fs.readFileSync(path.join(recipesDir, file), 'utf-8');
+  const tags = parseTags(raw);
+  const body = stripFrontmatter(raw);
+  const title = body.split('\n')[0].replace(/^#\s*/, '').trim();
+  return { file, title, tags, content: JSON.stringify(body) };
 });
 
 let html = `<!DOCTYPE html>
