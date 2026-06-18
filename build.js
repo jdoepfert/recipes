@@ -158,7 +158,7 @@ let html = `<!DOCTYPE html>
 <body>
 <nav>
   <h1>📖 Meine Rezepte</h1>
-  ${recipes.map((r, i) => `<a href="#" id="nav-${i}" class="${i === 0 ? 'active' : ''}">${r.tags.map(t => tagEmoji[t] || '').join('')} ${escHtml(r.title)}</a>`).join('\n  ')}
+  ${recipes.map((r, i) => `<a href="#" id="nav-${i}" class="${i === 0 ? 'active' : ''}">${escHtml(r.title)} ${r.tags.map(t => tagEmoji[t] || '').join('')}</a>`).join('\n  ')}
 </nav>
 <main>
   ${recipes.map((r, i) => `<div class="recipe${i === 0 ? ' active' : ''}" id="recipe-${i}"></div>`).join('\n  ')}
@@ -177,7 +177,7 @@ let html = `<!DOCTYPE html>
     const tags = recipeTags[i];
     if (tags.length) {
       const badges = tags.map(t => '<span class=\"tag\">' + (tagEmoji[t] || '') + ' ' + escHtml(t) + '</span>').join(' ');
-      html = html.replace('<h1>', '<h1>' + badges);
+      html = html.replace(/<h1>(.*?)<\/h1>/, '<h1>$1 ' + badges + '</h1>');
     }
     el.innerHTML = html;
   }
