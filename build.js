@@ -4,6 +4,19 @@ const path = require('path');
 const recipesDir = path.join(__dirname, 'recipes');
 const outputFile = path.join(__dirname, 'index.html');
 
+const tagEmoji = {
+  vegan: '🌱',
+  vegetarisch: '🥦',
+  glutenfrei: '🍚',
+  'wenig-gluten': '🌾',
+};
+
+function parseTags(content) {
+  const m = content.match(/^---\n[\s\S]*?\ntags:\s*\[([^\]]*)\]\n[\s\S]*?\n---\n/);
+  if (!m) return [];
+  return m[1].split(',').map(t => t.trim()).filter(Boolean);
+}
+
 const files = fs.readdirSync(recipesDir)
   .filter(f => f.endsWith('.md'))
   .sort();
@@ -11,7 +24,8 @@ const files = fs.readdirSync(recipesDir)
 let recipes = files.map(file => {
   const content = fs.readFileSync(path.join(recipesDir, file), 'utf-8');
   const title = content.split('\n')[0].replace(/^#\s*/, '').trim();
-  return { file, title, content: JSON.stringify(content) };
+  const tags = parseTags(content);
+  return { file, title, tags, content: JSON.stringify(content) };
 });
 
 let html = `<!DOCTYPE html>
@@ -107,6 +121,16 @@ let html = `<!DOCTYPE html>
     color: #888;
   }
   .source a { color: #7a6a5a; }
+  .tags { margin: 0 0 1rem; }
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    margin-right: 0.35rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    background: #f0e8dd;
+    color: #5a4a3a;
+  }
   @media (max-width: 700px) {
     body { flex-direction: column; }
     nav {
@@ -126,13 +150,15 @@ let html = `<!DOCTYPE html>
 <body>
 <nav>
   <h1>📖 Meine Rezepte</h1>
-  ${recipes.map((r, i) => `<a href="#" id="nav-${i}" class="${i === 0 ? 'active' : ''}">${escHtml(r.title)}</a>`).join('\n  ')}
+  ${recipes.map((r, i) => `<a href="#" id="nav-${i}" class="${i === 0 ? 'active' : ''}">${r.tags.map(t => tagEmoji[t] || '').join('')} ${escHtml(r.title)}</a>`).join('\n  ')}
 </nav>
 <main>
   ${recipes.map((r, i) => `<div class="recipe${i === 0 ? ' active' : ''}" id="recipe-${i}"></div>`).join('\n  ')}
 </main>
 <script>
   const recipes = [${recipes.map(r => r.content).join(',\n    ')}];
+  const recipeTags = [${recipes.map(r => JSON.stringify(r.tags)).join(',\n    ')}];
+  const tagEmoji = ${JSON.stringify(tagEmoji)};
   function escHtml(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
@@ -140,6 +166,11 @@ let html = `<!DOCTYPE html>
     const el = document.getElementById('recipe-' + i);
     let html = marked.parse(recipes[i]);
     html = html.replace(/<a href="https?:\\/\\//g, '<a target="_blank" rel="noopener" href="https://');
+    const tags = recipeTags[i];
+    if (tags.length) {
+      const badges = tags.map(t => '<span class=\"tag\">' + (tagEmoji[t] || '') + ' ' + escHtml(t) + '</span>').join(' ');
+      html = html.replace('<h1>', '<h1>' + badges);
+    }
     el.innerHTML = html;
   }
   function show(i) {
