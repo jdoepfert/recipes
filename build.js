@@ -12,9 +12,11 @@ const tagEmoji = {
 };
 
 function parseTags(content) {
-  const m = content.match(/^---\n[\s\S]*?\ntags:\s*\[([^\]]*)\]\n[\s\S]*?\n---\n/);
+  const m = content.match(/^---\n([\s\S]*?)\n---\n/);
   if (!m) return [];
-  return m[1].split(',').map(t => t.trim()).filter(Boolean);
+  const tagsMatch = m[1].match(/tags:\s*\[([^\]]*)\]/);
+  if (!tagsMatch) return [];
+  return tagsMatch[1].split(',').map(t => t.trim()).filter(Boolean);
 }
 
 function stripFrontmatter(content) {
@@ -29,7 +31,8 @@ let recipes = files.map(file => {
   const raw = fs.readFileSync(path.join(recipesDir, file), 'utf-8');
   const tags = parseTags(raw);
   const body = stripFrontmatter(raw);
-  const title = body.split('\n')[0].replace(/^#\s*/, '').trim();
+  const titleM = raw.match(/^#\s*(.+)/m);
+  const title = titleM ? titleM[1].trim() : 'Unbekannt';
   return { file, title, tags, content: JSON.stringify(body) };
 });
 
