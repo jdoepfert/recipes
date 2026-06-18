@@ -1,3 +1,7 @@
+---
+tags: [vegan]
+---
+
 # Vegan Lemon Loaf (Zitronenkuchen)
 
 ## Zutaten

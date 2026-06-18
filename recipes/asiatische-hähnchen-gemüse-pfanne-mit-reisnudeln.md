@@ -1,3 +1,7 @@
+---
+tags: [wenig-gluten]
+---
+
 # Asiatische Hähnchen-Gemüse-Pfanne mit Reisnudeln
 
 Allgemeine Informationen: 2 Portionen, Arbeitszeit ca. 30 Min., Koch-/Backzeit ca. 15 Min., Ruhezeit ca. 1 Std., Gesamtzeit ca. 1 Std. 45 Min.

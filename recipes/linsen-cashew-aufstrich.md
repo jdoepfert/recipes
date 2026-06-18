@@ -1,3 +1,7 @@
+---
+tags: [vegan, glutenfrei]
+---
+
 # Linsen-Cashew-Aufstrich
 
 ## Zutaten

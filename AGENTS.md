@@ -21,6 +21,8 @@ Available tags (choose all that apply):
 
 If none of the tags apply, use `tags: []`. Do not add custom tags beyond this list.
 
+To determine which tags are appropriate, research every ingredient via `websearch`. For each ingredient check whether it contains animal products (for `vegan`/`vegetarisch`) or gluten (for `glutenfrei`/`wenig-gluten`). If the only source of gluten in a recipe is a small amount of a condiment (e.g. soy sauce), use `wenig-gluten` instead of omitting the category entirely.
+
 ## Recipe Structure
 
 Every recipe **must** follow this exact section order:
