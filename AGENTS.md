@@ -1,5 +1,26 @@
 # Recipe Format Conventions
 
+## Tags (YAML Frontmatter)
+
+Every recipe **must** start with YAML frontmatter containing its tags:
+
+```yaml
+---
+tags: [vegan, glutenfrei]
+---
+```
+
+Available tags (choose all that apply):
+
+| Tag | Bedeutung |
+| --- | --- |
+| `vegan` | Rein pflanzlich, keine tierischen Produkte |
+| `vegetarisch` | Vegetarisch (erlaubt Eier, Milchprodukte, Honig) |
+| `glutenfrei` | Enthält keinerlei Gluten |
+| `wenig-gluten` | Enthält nur geringe Mengen Gluten (z. B. nur durch Sojasauce) |
+
+If none of the tags apply, use `tags: []`. Do not add custom tags beyond this list.
+
 ## Recipe Structure
 
 Every recipe **must** follow this exact section order:
