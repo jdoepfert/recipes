@@ -9,6 +9,7 @@ const tagEmoji = {
   vegetarisch: '🥦',
   glutenfrei: '🍚',
   'wenig-gluten': '🌾',
+  'high-protein': '💪',
 };
 
 function parseTags(content) {

@@ -18,10 +18,11 @@ Available tags (choose all that apply):
 | `vegetarisch` | Vegetarisch (erlaubt Eier, Milchprodukte, Honig) |
 | `glutenfrei` | Enthält keinerlei Gluten |
 | `wenig-gluten` | Enthält nur geringe Mengen Gluten (z. B. nur durch Sojasauce) |
+| `high-protein` | Mehr als 7,5 g Protein pro 100 g |
 
 If none of the tags apply, use `tags: []`. Do not add custom tags beyond this list.
 
-To determine which tags are appropriate, research every ingredient via `websearch`. For each ingredient check whether it contains animal products (for `vegan`/`vegetarisch`) or gluten (for `glutenfrei`/`wenig-gluten`). If the only source of gluten in a recipe is a small amount of a condiment (e.g. soy sauce), use `wenig-gluten` instead of omitting the category entirely.
+To determine which tags are appropriate, research every ingredient via `websearch`. For each ingredient check whether it contains animal products (for `vegan`/`vegetarisch`) or gluten (for `glutenfrei`/`wenig-gluten`). If the only source of gluten in a recipe is a small amount of a condiment (e.g. soy sauce), use `wenig-gluten` instead of omitting the category entirely. For `high-protein`, check the calculated protein value per 100 g in the nutritional table.
 
 ## Recipe Structure
 

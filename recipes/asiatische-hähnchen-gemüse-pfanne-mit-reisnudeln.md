@@ -1,5 +1,5 @@
 ---
-tags: [wenig-gluten]
+tags: [wenig-gluten, high-protein]
 ---
 
 # Asiatische Hähnchen-Gemüse-Pfanne mit Reisnudeln

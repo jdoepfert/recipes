@@ -1,5 +1,5 @@
 ---
-tags: [vegan, glutenfrei]
+tags: [vegan, glutenfrei, high-protein]
 ---
 
 # Linsen-Cashew-Aufstrich
